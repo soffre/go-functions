@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hasura/go-graphql-client"
 )
 
 func main() {
@@ -24,11 +25,15 @@ func main() {
 	})
 
 	r.POST("/name", func(c *gin.Context) {
-		name := c.Param("name")
-		c.JSON(200, gin.H{
 
-			"message": fmt.Sprintf("hello, %s!", name),
+		client := graphql.NewClient("http://localhost:8081/v1/graphql", nil)
+		client = client.WithRequestModifier(func(r *http.Request) {
+			r.Header.Set("x-hasura-admin-secret", "myhasura")
 		})
+		c.JSON(http.StatusOK, gin.H{
+			"message": "nothing",
+		})
+
 	})
 
 	r.Run(fmt.Sprintf(":%s", port))
