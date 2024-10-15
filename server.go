@@ -31,7 +31,7 @@ func main() {
 			r.Header.Set("x-hasura-admin-secret", "myhasura")
 		})
 		c.JSON(http.StatusOK, gin.H{
-			"message": "nothing",
+			"message": "nothing but to check",
 		})
 
 	})
