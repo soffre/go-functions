@@ -23,10 +23,10 @@ func main() {
 		})
 	})
 
-	r.GET("/name", func(c *gin.Context) {
+	r.POST("/name", func(c *gin.Context) {
 		name := c.Param("name")
-
 		c.JSON(200, gin.H{
+
 			"message": fmt.Sprintf("hello, %s!", name),
 		})
 	})
